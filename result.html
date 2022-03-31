@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SENDWICH-검사결과</title>
+<style type="text/css">
+.title {
+    width: 600px;
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 30px;
+}
+body{
+	margin: 0;
+}
+.upside_bar {
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    border-bottom: 1px solid #BDBDBD;
+    border-top-color: #BDBDBD;
+    border-right-color: #BDBDBD;
+    border-left-color: #BDBDBD;
+}
+.login {
+	float: left;
+	height: 20px;
+	width: 200px;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 85%;
+}
+.file {
+    border: 1px solid #D4D4D4;
+	height: 50px;
+	width: 600px;
+	display: inline-block;
+	text-align: center;
+	font-size: x-large;
+	border-radius: 100px;
+	margin-bottom: 10px;
+}
+.for_center {
+    width: 100%;
+	text-align: center;
+}
+.for_center_2 {
+    width: 600px;
+	margin-top: 50px;
+	display: inline-block;
+}
+.plus {
+    width: 600px;
+	height: 70px;
+	text-align: right;
+	margin-top: 30px;
+}
+.plus2 {
+    width: 600px;
+	height: 30px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	text-align: right;
+}
+.next_btn {
+    background-color: #e89f3d;
+    width: 100px;
+	height: 30px;
+	text-align: center;
+	font-size: x-large;
+	display: inline-block;
+}
+.check_text {
+    width: 600px;
+	text-align: left;
+}
+.empty {
+    width: 20px;
+	display: inline-block;
+}
+.checking {
+    width: 600px;
+	display: inline-block;
+	text-align: center;
+	margin-top: 30px;
+}
+</style>
+</head>
+<body>
+<div class="upside_bar">
+  <div class="login"><a href="login.html">마이메뉴</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">알림</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="login.html">로그아웃</a></div>
+</div>
+<div class="for_center">
+  <div class="for_center_2">
+    <div class="title"><img src="image/result_title.png" width="500" alt=""/><br></div>
+	  
+    <div class="file">파일1</div><br>
+	<div class="file">파일2</div>
+	
+	<!-- 체크박스 -->
+	<div class="checking">
+		<form action="/checking" name="frmCheck" method="post" id="checkedPrivacy">
+			<div>
+				<label><input type="checkbox" id="checkID" value="">주민등록번호</label>
+				<label><input type="checkbox" id="checkPP" value="">여권번호</label>
+				<label><input type="checkbox" id="checkD" value="">운전면허번호</label>
+				<label><input type="checkbox" id="checkP" value="">휴대폰번호</label>
+			</div>
+			<div>
+				<label><input type="checkbox" name="checkF" value="">외국인등록번호</label>
+				<label><input type="checkbox" name="checkC" value="">신용/체크카드번호</label>
+				<label><input type="checkbox" name="checkHI" value="">건강보험번호</label>
+			</div>
+		</form>
+	</div>
+	  
+	<div class="plus">
+	  <img src="image/btn_next.png" width="70" alt="" onclick="masking()"/>
+	</div>
+	
+  </div>
+</div>
+
+<form action="/masking" method="post" id="fileData"> 
+</form>
+
+<script>
+	function masking(){
+		
+		document.getElementById('fileData').submit();
+		alert("마스킹합니다.");
+		document.getElementById('checkedPrivacy').submit();
+	}
+</script>
+
+
+</body>
+</html>

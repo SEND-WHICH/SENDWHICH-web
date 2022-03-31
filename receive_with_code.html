@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SENDWICH-인증번호입력</title>
+<style type="text/css">
+.title {
+    width: 600px;
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 30px;
+}
+body{
+	margin: 0;
+}
+.upside_bar {
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    border-bottom: 1px solid #BDBDBD;
+    border-top-color: #BDBDBD;
+    border-right-color: #BDBDBD;
+    border-left-color: #BDBDBD;
+}
+.login {
+	float: left;
+	height: 20px;
+	width: 200px;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 85%;
+}
+.file {
+    border: 1px solid #D4D4D4;
+	height: 50px;
+	width: 600px;
+	display: inline-block;
+	text-align: center;
+	font-size: x-large;
+	border-radius: 100px;
+	margin-bottom: 10px;
+}
+.for_center {
+    width: 100%;
+	text-align: center;
+}
+.for_center_2 {
+    width: 1000px;
+	margin-top: 50px;
+	display: inline-block;
+	text-align: center;
+}
+.plus {
+    width: 1000px;
+	height: 70px;
+	text-align: center;
+	margin-top: 30px;
+}
+.plus2 {
+    width: 600px;
+	height: 30px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	text-align: right;
+}
+.next_btn {
+    background-color: #e89f3d;
+    width: 100px;
+	height: 30px;
+	text-align: center;
+	font-size: x-large;
+	display: inline-block;
+}
+.check_text {
+    width: 600px;
+	text-align: left;
+}
+.empty {
+    width: 20px;
+	display: inline-block;
+}
+.list_content {
+    width: 1000px;
+	text-align: center;
+}
+.btn_box {
+    width: 150px;
+	display: inline-block;
+	text-align: center;
+}
+.list_1 {
+    width: 400px;
+	display: inline-block;
+}
+.btn_1 {
+    width: 150px;
+	display: inline-block;
+}
+.btn_2 {
+    width: 150px;
+	margin-top: 100px;
+	display: inline-block;
+}
+.received_file {
+    height: 150px;
+    width: 300px;
+	float: left;
+}
+.from {
+	text-align: left;
+	margin-left: 15px;
+}
+.received_box {
+    height: 100px;
+    width: 300px;
+    border: thin solid #B3B3B3;
+}
+.file_name {
+    width: 150px;
+    font-size: xx-large;
+	margin-top: 18px;
+	margin-left: 10px;
+	text-align: left;
+	float: left;
+}
+.file_info {
+    font-size: large;
+    width: 150px;
+	text-align: left;
+	margin-left: 15px;
+	margin-top: 10px;
+	
+}
+.download_btn {
+    height: 90px;
+    width: 100px;
+	float: right;
+	margin-top: 10px;
+}
+.box_layout {
+    height: 100px;
+    width: 150px;
+	float: left;
+}
+.time {
+    width: 100px;
+	margin-top: 7px;
+}
+.margin {
+	float: left;
+	padding: 25px;
+}
+.num_box {
+    height: 70px;
+    width: 50px;
+    border: 1px solid #999999;
+	display: inline-block;
+}
+.num_margin {
+	display: inline-block;
+	padding: 10px;
+}
+.ok_btn {
+    width: 1000px;
+	display: inline-block;
+	margin-top: 50px;
+}
+</style>
+</head>
+<body>
+<div class="upside_bar">
+  <div class="login"><a href="login.html">마이메뉴</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">알림</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="login.html">로그아웃</a></div>
+</div>
+<div class="for_center">
+  <div class="for_center_2">
+    <div class="title"><img src="image/code_title.png" width="500" alt=""/><br></div>
+    <!-- 인증번호 textarea -->
+	<div class="certificating">
+		<form action="/certificating" name="frmCirtificate" method="post" id="isCorrectCode">
+			<div>
+				<textarea type="checkbox" name="inputCode" id="inputCode" ></textarea>
+				<!-- <textarea type="hidden" name="sampleHidden"></textarea> -->
+			</div>
+		</form>
+	</div>
+	   
+</div>
+  <div class="ok_btn"><img src="image/code_btn_ok.png" width="350" alt="" onclick="funcCertificate()"/></div>
+  
+</div>
+
+
+<script>
+	function funcCertificate(){
+		
+		document.getElementById('isCorrectCode').submit();
+
+	}
+
+</script>
+
+
+</body>
+</html>

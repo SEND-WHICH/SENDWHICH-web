@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>sqlTest</title>
+<script src="../main.js"></script>
+<script src="../mem.json"></script>  
+
+<!-- <script>
+
+    const fs = require('fs');
+    const mem = fs.readFileSync('../mem.json');
+
+    var mydata = JSON.parse(mem);
+    alert(mydata);
+    alert(mydata[0].UserID);
+    alert(mydata[0].UserEmail);
+    alert(mydata[0].UserPwd);
+    alert(mydata[0].UserName);
+
+    
+</script> -->
+
+<body>
+    <p id="demo"></p>
+
+    <script type="text/javascript">
+      var xmlhttp = new XMLHttpRequest();
+      var url = "../mem.json";
+
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          myfunc(xmlhttp.responseText);
+        }
+      };
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+
+      function myfunc(resp) {
+        var arr = JSON.parse(resp);
+        var out = "<table border='1'>";
+
+        for (var i = 0; i < arr.length; i++) {
+          out+=
+            "<tr>"+
+            "<td>"+ arr[i].UserID + "</td>" +
+            "<td>"+ arr[i].UserEmail + "</td>" +
+            "</tr>";
+        }
+        document.getElementById('demo').innerHTML = out;
+      }
+    </script>
+  </body>
+
+<form id='memList' action='/user/showmem' method='get'>	
+    <input type="submit" value="로그인" class="login_button">
+    
+</form>
+
+

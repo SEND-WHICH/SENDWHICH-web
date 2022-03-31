@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+	<script src="../main.js"></script>
+	<script src="./app.js"></script>
+	<script src="./s3down.js"></script>
+<meta charset="UTF-8">
+<title>SENDWICH-인증번호 수신목록</title>
+<style type="text/css">
+.title {
+    width: 600px;
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 30px;
+}
+body{
+	margin: 0;
+}
+.upside_bar {
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    border-bottom: 1px solid #BDBDBD;
+    border-top-color: #BDBDBD;
+    border-right-color: #BDBDBD;
+    border-left-color: #BDBDBD;
+}
+.login {
+	float: left;
+	height: 20px;
+	width: 200px;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 85%;
+}
+.file {
+    border: 1px solid #D4D4D4;
+	height: 50px;
+	width: 600px;
+	display: inline-block;
+	text-align: center;
+	font-size: x-large;
+	border-radius: 100px;
+	margin-bottom: 10px;
+}
+.for_center {
+    width: 100%;
+	text-align: center;
+}
+.for_center_2 {
+    width: 1000px;
+	margin-top: 50px;
+	display: inline-block;
+	text-align: center;
+}
+.plus {
+    width: 1000px;
+	height: 70px;
+	text-align: center;
+	margin-top: 30px;
+}
+.plus2 {
+    width: 600px;
+	height: 30px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	text-align: right;
+}
+.next_btn {
+    background-color: #e89f3d;
+    width: 100px;
+	height: 30px;
+	text-align: center;
+	font-size: x-large;
+	display: inline-block;
+}
+.check_text {
+    width: 600px;
+	text-align: left;
+}
+.empty {
+    width: 20px;
+	display: inline-block;
+}
+.list_content {
+    width: 1000px;
+	text-align: center;
+}
+.btn_box {
+    width: 150px;
+	display: inline-block;
+	text-align: center;
+}
+.list_1 {
+    width: 400px;
+	display: inline-block;
+}
+.btn_1 {
+    width: 150px;
+	display: inline-block;
+}
+.btn_2 {
+    width: 150px;
+	margin-top: 100px;
+	display: inline-block;
+}
+.received_file {
+    height: 150px;
+    width: 300px;
+	float: left;
+}
+.from {
+	text-align: left;
+	margin-left: 15px;
+}
+.received_box {
+    height: 100px;
+    width: 300px;
+    border: thin solid #B3B3B3;
+}
+.file_name {
+    width: 150px;
+    font-size: x-large;
+	margin-top: 18px;
+	margin-left: 10px;
+	text-align: left;
+	float: left;
+}
+.file_info {
+    font-size: large;
+    width: 150px;
+	text-align: left;
+	margin-left: 15px;
+	margin-top: 10px;
+	
+}
+.download_btn {
+    height: 90px;
+    width: 100px;
+	float: right;
+	margin-top: 10px;
+}
+.box_layout {
+    height: 100px;
+    width: 150px;
+	float: left;
+}
+.time {
+    width: 100px;
+	margin-top: 7px;
+}
+.margin {
+	float: left;
+	padding: 25px;
+}
+</style>
+</head>
+
+<body>
+
+	<form action="/download" method="post" id="downloadBtn">
+		<input type="hidden" name="fileName" id="fileName">
+		<input type="hidden" name="link" id="link">
+	</form>
+<script>
+
+	var arr;
+
+	
+
+	var xmlhttp = new XMLHttpRequest();
+      var url = "certNumFiles.json";
+
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          showArray(xmlhttp.responseText);
+        }
+      };
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+
+      function showArray(resp){
+        arr = JSON.parse(resp);
+        var out;
+
+		
+
+        for (var i = 0; i < arr.length; i++) {
+		  out+=
+			'<div class="received_file"> <div class="from">보낸 사람 : ' + arr[0].sendId + '</div><div class="received_box"><div class="box_layout"><div class="file_name">'+arr[0].filename+'</div><div class="file_info">'
+				+ arr[0].filesize + '</div></div><div class="download_btn"><img src="image/recieved_btn_download.png" height="50" alt="" onclick="downloadFile()"/><div class="time">남은:시간</div></div></div>';
+        }
+        document.getElementById('list_contnet').innerHTML = out;
+        
+    }
+</script>
+
+
+<div class="upside_bar">
+  <div class="login"><a href="login.html">마이메뉴</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">알림</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="login.html">로그아웃</a></div>
+</div>
+<div id="app"></div>
+<div class="for_center">
+  <div class="for_center_2">
+    <div class="title"><img src="image/recieved_title.png" width="500" alt=""/><br></div>
+    <div class="list_content" id="list_contnet">
+	
+</div>
+	   
+</div>
+  <div class="to_main"><a href="index.html"><img src="image/finish_btn_gomain.png" width="150" alt=""/></a></div>
+</div>
+</body>
+<form action='/getFileList' method='post' id='getfilelist'>
+</form>
+
+<script>
+
+	function downloadFile(){
+		document.getElementById('fileName').value = String(arr[0].filename);
+        document.getElementById('link').value = "/index";
+        
+        alert("다운로드 완료!")
+
+		document.getElementById('downloadBtn').submit();
+	}
+
+	// function downloadFile(){
+	// 	s3Download();s
+	// }
+
+	
+</script>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+  <script src="./app.js"></script>
+  <script src="./saveFileData.js"></script>
+  <script src="./download.js"></script>
+  <script src="../main.js"></script>
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+
+  <script>
+    // function getHtml(template) {
+    //   return template.join('\n');
+    // }
+    // listAlbums();
+  </script>
+	
+<meta charset="UTF-8">
+<title>SENDWICH-파일선택</title>
+<style type="text/css">
+.title {
+    width: 600px;
+	display: inline-block;
+	text-align: center;
+}
+body{
+	margin: 0;
+}
+.upside_bar {
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    border-bottom: 1px solid #BDBDBD;
+    border-top-color: #BDBDBD;
+    border-right-color: #BDBDBD;
+    border-left-color: #BDBDBD;
+}
+.login {
+	float: left;
+	height: 20px;
+	width: 200px;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 85%;
+}
+.file {
+    border: 1px solid #D4D4D4;
+	height: 50px;
+	width: 600px;
+	display: inline-block;
+	text-align: center;
+	font-size: x-large;
+	border-radius: 100px;
+	margin-bottom: 10px;
+}
+.for_center {
+    width: 100%;
+	text-align: center;
+}
+.for_center_2 {
+    width: 600px;
+	margin-top: 50px;
+	display: inline-block;
+}
+.plus {
+    width: 600px;
+	height: 70px;
+	text-align: right;
+	margin-top: 30px;
+}
+.plus2 {
+    width: 600px;
+	height: 30px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	text-align: right;
+}
+.next_btn {
+    background-color: #e89f3d;
+    width: 100px;
+	height: 30px;
+	text-align: center;
+	font-size: x-large;
+	display: inline-block;
+}
+.check_text {
+    width: 600px;
+	text-align: left;
+}
+.empty {
+    width: 20px;
+	display: inline-block;
+}
+</style>
+</head>
+
+<body>
+<div class="upside_bar">
+  <div class="login"><a href="login.html">마이메뉴</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">알림</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="login.html">로그아웃</a></div>
+</div>
+<div class="for_center">
+  <div class="for_center_2">
+	<div class="title"><img src="image/choose_title.png" width="500" alt=""/><br></div>
+	<div class="plus2">
+		<input id="uploaded" name="uploaded" type="file" multiple>
+		
+		<script>
+			var albumname = 'folder'
+		</script>
+
+		<input type="button" id="button1" onclick="button1_click();" value="확인" />
+
+		<script type="text/javascript">
+
+			//비어있는 div 안에 업로드한 파일명 보여주기
+			$(function()
+			{
+				$('#uploaded').on('change',function ()
+				{
+					var filePath = document.getElementById('uploaded').files[0];
+					$("#file").html(filePath);
+				});
+			});
+	
+		</script>
+		
+		</div>
+
+	<!--  <div class="plus2"><img src="image/choose_btn_findfile.png" width="55" alt=""/></div>  -->
+	  
+    <div class="file" id='first' onclick="chosen()"><script>
+		
+	//document.write(document.getElementById('uploaded').files[0]);
+	//document.write(fileName);
+	</script></div><br>
+	
+	
+	
+	
+	  
+	<div class="plus"><a href="index.html"><img src="image/btn_previous.png" width="70" alt=""/></a>
+	  <div class="empty"></div>
+	  <img src="image/btn_next.png" width="70" alt="" onclick="toNext()">
+	</div>
+	
+  </div>
+</div>
+
+<!--수경언니가 구박해서 급 주석 달기-->
+<!--file명 main.js에 보내서 함수 실행-->
+
+<!-- <form action="/download" method="post" id="downloadFile">
+	<input type="hidden" name="fileName" id="fileName">
+	<input type="hidden" name="link" id="link">
+</form> -->
+
+<form action="/makejsonfile" method="post" id="sibalsibal">
+	<input type="hidden" name="sibal" id="sibal">
+	<input type="hidden" name="fileName" id="fileName">
+</form>
+
+<script>
+	//다음 페이지로 파일명 전달해줄 변수
+	var fileName;
+
+	//마스킹 페이지로 갈건지 전송 페이지로 갈 건지
+	var isMasking = false;
+
+	function button1_click() {
+		addPhoto(albumname);
+		//$('#first').text(document.getElementById('uploaded').files[0].name);
+		//$('#first').load(window.loaction.href + '#first');
+		document.getElementById("first").innerHTML = document.getElementById('uploaded').files[0].name;
+		fileName = document.getElementById('uploaded').files[0].name;
+	}
+
+	//다음 버튼 눌렀을 때
+	function toNext() {
+		//마스킹 안하기로 하면 그냥 받는 사람 고르기로 넘어감
+		if (isMasking == false) {
+			location.href = "./receiver.html"
+		} else {
+			//마스킹 하기로 하면 파일 제목 json으로 넘겨줌
+			$(function() {
+         
+				// 리스트 생성
+				var testList = new Array();
+		
+				for(var i=1; i<=1; i++){
+					// 객체 생성
+					var data = new Object() ;
+					data.json_title = fileName;
+					// 리스트에 생성된 객체 삽입
+					testList.push(data) ;
+				}
+		
+				// String 형태로 변환
+				var jsonData = JSON.stringify(data);
+				document.getElementById('sibal').value = String(jsonData);
+				document.getElementById('fileName').value = String(fileName);
+				alert(fileName);
+				document.getElementById('sibalsibal').submit();
+			});
+
+			
+
+			// document.getElementById('link').value = "/result"
+			// document.getElementById('fileName').value = String(fileName);
+			// document.getElementById('downloadFile').submit();
+
+			//location.href = "./result.html"
+		}
+
+		
+	}
+
+	
+
+	//파일 선택됐을 때
+	function chosen() {
+		if (isMasking == false) {
+			document.getElementById('first').style.backgroundColor = "#BABABA";
+			isMasking = true;
+		} else {
+			document.getElementById('first').style.backgroundColor = "#ffffff";
+			isMasking = false;
+		}
+	}
+
+	function sendPost(action, params) {
+		var form = document.createElement('form');
+		form.setAttribute('method', 'post');
+		form.setAttribute('action', action);
+		document.charset = "utf-8";
+
+		for ( var key in params) {
+			var hiddenField = document.createElement('input');
+			hiddenField.setAttribute('type', 'hidden');
+			hiddenField.setAttribute('name', key);
+			hiddenField.setAttribute('value', params[key]);
+			form.appendChild(hiddenField);
+		}
+		document.body.appendChild(form);
+		form.submit();
+	}
+
+</script>
+
+</body>
+</html>

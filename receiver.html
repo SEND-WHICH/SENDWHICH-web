@@ -1,0 +1,373 @@
+<!doctype html>
+<html>
+<head>
+    <script src="../main.js"></script>
+
+<meta charset="UTF-8">
+<title>SENDWICH-받는사람선택</title>
+<style type="text/css">
+.title {
+    width: 600px;
+   display: inline-block;
+   text-align: center;
+   margin-bottom: 30px;
+}
+body{
+   margin: 0;
+}
+.upside_bar {
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    border-bottom: 1px solid #BDBDBD;
+    border-top-color: #BDBDBD;
+    border-right-color: #BDBDBD;
+    border-left-color: #BDBDBD;
+}
+.login {
+   float: left;
+   height: 20px;
+   width: 200px;
+   margin-top: 15px;
+   margin-right: 0px;
+   margin-bottom: 0px;
+   margin-left: 85%;
+}
+.file {
+    border: 1px solid #D4D4D4;
+   height: 50px;
+   width: 600px;
+   display: inline-block;
+   text-align: center;
+   font-size: x-large;
+   border-radius: 100px;
+   margin-bottom: 10px;
+}
+.for_center {
+    width: 100%;
+   text-align: center;
+}
+.for_center_2 {
+    width: 1000px;
+   margin-top: 50px;
+   display: inline-block;
+   text-align: center;
+}
+.plus {
+    width: 1000px;
+   height: 70px;
+   text-align: right;
+   margin-top: 30px;
+}
+.plus2 {
+    width: 600px;
+   height: 30px;
+   margin-top: 30px;
+   margin-bottom: 10px;
+   text-align: right;
+}
+.next_btn {
+    background-color: #e89f3d;
+    width: 100px;
+   height: 30px;
+   text-align: center;
+   font-size: x-large;
+   display: inline-block;
+}
+.check_text {
+    width: 600px;
+   text-align: left;
+}
+.empty {
+    width: 20px;
+   display: inline-block;
+}
+.list_content {
+    width: 1000px;
+   text-align: center;
+}
+.btn_box {
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+}
+.list_1 {
+    width: 400px;
+   display: inline-block;
+}
+.btn_1 {
+    width: 140px;
+    display: inline-block;
+}
+.btn_2 {
+    width: 140px;
+    margin-top: 100px;
+    display: inline-block;
+}
+.table_margin {
+    height: 400px;
+    width: 5px;
+}
+.cell {
+    height: 70px;
+    width: 300px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 70px;
+    border: 1px solid #BABABA;
+}
+</style>
+</head>
+<body>
+    <form action="/user/showmem", method="get", id="mem">
+    </form>
+<script>
+    //document.getElementById('mem').submit();
+
+    var arr;
+    var fileName;
+
+    //sql에서 회원 가져오기
+    var xmlhttp = new XMLHttpRequest();
+      var url = "mem.json";
+
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          showArray(xmlhttp.responseText);
+        }
+      };
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+
+      function showArray(resp){
+        arr = JSON.parse(resp);
+        var out;
+
+        for (var i = 0; i < arr.length; i++) {
+          out+=
+            '<tr>'+
+            '<div class="cell" id="cell' + i + '" onclick="chooseReceiver(id)">' +
+            arr[i].UserName +
+            '</div>' +
+            '</tr>';
+        }
+        document.getElementById('memList').innerHTML = out;
+        
+    }
+
+    var xmlhttp2 = new XMLHttpRequest();
+      var url = "example.json";
+
+      xmlhttp2.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          showArray2(xmlhttp2.responseText);
+        }
+      };
+      xmlhttp2.open("GET", url, true);
+      xmlhttp2.send();
+
+      function showArray2(resp){
+        var title = JSON.parse(resp);
+
+        fileName = title.json_title;
+    }
+
+</script>
+
+<div class="upside_bar">
+  <div class="login"><a href="login.html">마이메뉴</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">알림</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="login.html">로그아웃</a></div>
+</div>
+<div class="for_center">
+  <div class="for_center_2">
+    <div class="title"><img src="image/sendto_title.png" width="500" alt=""/><br></div>
+    <div class="list_content">
+      <div class="list_1" id="demo">
+
+<div style="width: 320px; height: 400px; overflow: auto">
+    <table id="memList" width="300px" border="1" bordercolor="#BABABA">
+    </table>
+</div></div>
+      <div class="btn_box"><strong style=""></strong>
+        <div class="btn_1">
+        <input type="image" src="image/sendto_btn_add.png" width="100" alt="" onclick="plusReciever()"/>
+        </div>
+        <div class="btn_2"><img src="image/sendto_btn_delete.png" width="100" alt=""/></div>
+      </div>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <div class="list_1"><div style="width: 320px; height: 400px; overflow: auto">
+    <table id="resultList" width="300px" border="1" bordercolor=#BABABA>
+      </table></div>
+  </div>
+
+
+  <!-- 인증코드 생성 여부 체크박스 -->
+   <div class="creating">
+      <form action="/creating" name="frmCheckCode" method="post" id="checkedCode">
+         <label>
+            
+         </label>
+      </form>
+    </div>
+    
+<form action="/sendFileData2" method="post" id="sendFileData" name="sendFileData">
+    <input type="hidden" id="getId" name="getId">
+    <input type="hidden" id="filename" name="filename">
+    <input type="hidden" id="timestamp" name="timestamp">
+    <input type="hidden" id="filesize" name="filesize">
+    <input type="hidden" id="fileS3path" name="fileS3path">
+    <input type="hidden" id="certNum" name="certNum">
+
+    <label>
+        <input type="checkbox" name="checkCode" id="checkCode" onclick="funcCode()">인증코드 생성하기</input>
+        <input type="hidden" name="codeHidden" />
+     </label>
+    
+    <div class="plus">
+        <a href="result.html"><img src="image/btn_previous.png" width="70" alt=""/></a>
+        <div class="empty"></div>
+        <input type="image" src = "image/btn_next.png" name="submit" width="70" value="submit">
+      </div>
+</form>
+
+
+<script>
+
+    
+
+    var receiverList = new Array();
+    for(var i = 0; i < receiverList.length; i++) {
+        receiverList.pop;
+    }
+
+    var idList = new Array();
+    for(var i = 0; i < idList.length; i++) {
+        idList.pop;
+    }
+
+    var seconds = 0;
+
+   function chooseReceiver(id){
+        var push = 0;
+        document.getElementById(id).style.backgroundColor = "#BABABA";
+        for(var i = 0; i < idList.length; i++){
+            if (idList[i] == id){
+                push = 1;
+            }
+        }
+        if (push === 0){
+            receiverList.push(document.getElementById(id).textContent);
+            idList.push(id);
+        }
+        
+    }
+    
+    
+
+    function plusReciever(){
+        if (seconds !== 0) {
+            for (var i = 0; i < seconds; i++){
+                var field = document.getElementById("secondcell" + i);
+                // #field 에서 삭제할 element 제거하기
+                document.getElementById('resultList').removeChild(field);
+            }
+            seconds = 0;
+        }
+
+        for(var i = 0; i < receiverList.length; i++){
+            var newDivHtml = receiverList[i];
+            var div = parent.document.createElement("div");
+            div.innerHTML = newDivHtml;
+            div.className = "cell";
+            div.id = "secondcell" + i;
+            // div.onclick= function () { 
+            //     removeReceiver(id);
+            // };
+            //alert(div.id);
+            seconds++;
+            // 특정 필드에 심기
+            parent.document.getElementById("resultList").appendChild(div);
+        }
+        for(var i = 0; i < receiverList.length; i++){
+        var target = document.getElementById("secondcell" + i);
+        target.addEventListener("click", function() {
+            document.getElementById(idList[i]).style.backgroundColor = "#123432";
+        });
+        }
+        sendFile();
+    }
+
+    // function removeReceiver(id){
+    //     alert(id + " + " + idList[id]);
+    //     document.getElementById(idList[id]).style.backgroundColor = "#FFFFFF";
+    // }
+    var finalList = new Array();
+
+    function showidlist(){
+
+        for(var i = 0; i < idList.length; i++){
+            var num = idList[i].replace("cell","");
+            var toInt = num;
+            toInt *= 1;
+            finalList.push(arr[num].UserEmail);
+        }
+
+        alert(finalList);
+    }
+
+    function sendFile(){
+        showidlist();
+        // for(var i = 0; i < finalList.length; i++){
+        //     document.getElementById('getId').value = String(finalList[i]);
+        //     document.getElementById('filename').value = String(fileName);
+        //     document.getElementById('timestamp').value = null;
+        //     document.getElementById('filesize').value = null;
+        //     document.getElementById('fileS3path').value = null;
+        //     document.getElementById('certNum').value = null;
+        //     alert(finalList);
+
+        //     document.getElementById('sendFileData').submit();
+        // }
+
+        document.getElementById('getId').value = String(finalList[0]);
+        document.getElementById('filename').value = String(fileName);
+        document.getElementById('timestamp').value = null;
+        document.getElementById('filesize').value = null;
+        document.getElementById('fileS3path').value = null;
+        document.getElementById('certNum').value = null;
+        // alert(document.getElementById('getId').value);
+        // alert(document.getElementById('timestamp').value);
+        // document.sendFileData.submit();
+        
+    }
+
+    // 인증코드 create 액션
+    function creating(){
+      
+      document.getElementById('checkedCode').submit();
+
+   }
+
+    // 인증코드 체크박스 결과 넘기기
+    function funcCode(){
+
+        // 인증코드 생성 체크박스 체크여부 확인
+        if ($('input[name=checkCode]').is(":checked")) {
+            $('input[name=codeHidden]').val('Y');
+        }
+        else {
+            $('input[name=codeHidden]').val('N');
+        }
+
+    }
+    
+</script>
+   
+   
+   
+  </div>
+</div>
+
+
+</body>
+</html>

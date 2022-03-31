@@ -1,0 +1,9 @@
+var mysql = require('mysql');
+var express = require('express');
+var bodyParser = require('body-parser');
+var fs = require('fs');
+var app = express();
+
+function saveFileData(fileData){
+    fs.writeFileSync('views/fileData.json', fileData);
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SENDWHICH-회원가입</title>
+<script src="../main.js"></script>
+	
+<style type="text/css">
+body{
+	margin: 0;
+}
+.upside_bar {
+    height: 50px;
+    background-color: #E89F3D;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    color: #F4BA1C;
+}
+
+.logo {
+    height: 300px;
+    width: 300px;
+	margin-left: 40%;
+}
+.input {
+    height: 300px;
+    width: 300px;
+	margin-left: 40%;
+	text-align: center;
+}
+.login_detail {
+    width: 300px;
+	margin-top: 10px;
+	display: inline-block;
+}
+.login_button {
+    background-color: #E89F3D;
+    height: 30px;
+    width: 300px;
+    font-size: x-large;
+}
+</style>
+</head>
+
+<body>
+<div class="upside_bar"></div>
+<div class="logo"><img src="image/logo.png" width="300" height="300" alt=""/></div>
+<div class="input">
+  <form action='/user/join' method='post'>
+    <input name="userEmail" type="text" placeholder="아이디" style="width:300px;height:30px;font-size:30px;"><br><br>
+    <input name="userPwd" type="password" placeholder="패스워드" style="width:300px;height:30px;font-size:30px;"><br><br>
+    <input name="userName" type="text" placeholder="이름" style="width:300px;height:30px;font-size:30px;"><br><br>
+	<input type="submit" value="회원가입" class="login_button"></div> <br>
+  </form>
+</div>
+	
+	
+</body>
+</html>
